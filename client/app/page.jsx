@@ -1,46 +1,74 @@
-
-import getAllPosts from "@/lib/getAllPosts";
+"use client"
+import axios from "axios";
+import { deleteBlog } from "@/lib/delete";
 import Link from "next/link";
-// import { useEffect, useState } from "react";
+import Edit from "../components/edit";
+import { useEffect, useState } from "react";
 
-export default async function Home() {
-  const allBlogs = await getAllPosts();
-  // const [allBlogs, setAllBlogs] = useState([]);
-  // useEffect(async () => {
-  //   const result = await fetch("http://localhost:4000/blogs");
-  //   const data = result.json();
-  //   setAllBlogs(data);
-  // },[]);
-  // if(!allBlogs) return <h2>Loading...</h2>
+export default function Home() {
+  // const allBlogs = await getAllPosts();
+  const [allBlogs, setAllBlogs] = useState(null);
+  const [editData, setEditData] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      await axios.get('http://localhost:4000/blogs')
+      .then(function (res) {
+        setAllBlogs(res.data);
+      })
+      .catch((error) => {
+        if(error.response.data.error === undefined){
+          alert('Internal error!');
+        } else {
+          alert(error.response.data.error);
+        };
+      });
+    };
+    getData();
+  },[]);
+
+  if(allBlogs === null) return <h1 className="text-center">Loading...</h1>
 
   return (
-    <main className="container">
+    <main className="container mb-5">
       <h1 className="text-center mt-4 mb-4">GET the all Blogs</h1>
       {
         allBlogs.map((item) => {
           return (
-            <Link 
-              href={`/${item.id}`} 
-              className="card mt-3 link-underline link-underline-opacity-0 link-body-emphasis" 
-              key={item.id}
-            >
+            <div className="card mt-3" key={item.id}>
               <div className="row p-3">
                 <div className="col-sm-6 col-lg-3 fw-bold">User Id: {item.userId}</div>
                 <div className="col-sm-6 col-lg-3 fw-bold">Blog Id: {item.id}</div>
                 <div className="col-sm-12 col-lg-6 text-sm-end">
-                  <button type="button" className="btn btn-outline-danger btn-sm me-2">Delete</button>
-                  <button type="button" className="btn btn-outline-success btn-sm me-2">Edit</button>
-                  <button type="button" className="btn btn-outline-secondary btn-sm ">Mark</button>
+                  <button 
+                    type="button" 
+                    className="btn btn-outline-danger btn-sm me-2"
+                    onClick={() => deleteBlog(item.id)}>
+                    Delete
+                  </button>
+                  <button 
+                    type="button" 
+                    className="btn btn-outline-success btn-sm me-2"
+                    onClick={() => setEditData(item)}
+                    data-bs-toggle="modal" data-bs-target="#editModal">
+                    Edit
+                  </button>
                 </div>
               </div>
-              <div className="card-body pt-0 pb-0">
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </div>
-            </Link>
+              <Link 
+                href={`/${item.id}`} 
+                className="link-underline link-underline-opacity-0 link-body-emphasis" 
+              >
+                <div className="card-body pt-0 pb-0">
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
+              </Link>
+            </div>
           )
         })
       }
+      <Edit data={editData}/>
     </main>
   );
 };

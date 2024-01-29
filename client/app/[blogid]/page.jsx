@@ -1,4 +1,5 @@
 import CreateComment from "@/components/createComment";
+import Favorite from "@/components/favorite";
 import getPost from "@/lib/getPost";
 
 export default async function Page({ params }) {
@@ -7,14 +8,20 @@ export default async function Page({ params }) {
   const post = data.getBlog;
   const comments = data.blogComments;
   if(!data) return <h2>Loading...</h2>
-  
+
   return (
     <div className="container mt-5">
-      <h5>User Id:- {post.userId}</h5>
-      <h5>Blog Id:- {post.id}</h5>
+      <div className="input-group">
+        <div className="me-5">
+          <h5>User Id:- {post.userId}</h5>
+          <h5>Blog Id:- {post.id}</h5>
+        </div>
+        <Favorite id={post.id}/>
+      </div>
       <h2>{post.title}</h2>
       <p>{post.body}</p>
-      <div className="card">
+      <div className="card mt-5">
+        <h3 className="ps-3 pt-3">All Post comment</h3>
         {
           comments.map((comment) => {
             return (

@@ -10,7 +10,7 @@ export default function CreateBlog() {
   });
 
   //blog data send the server
-  const handleSubmit = async (e) => {
+  const postHandleSubmit = async (e) => {
     e.preventDefault();
     await axios.post('http://localhost:4000/blogs', blog)
       .then((res) => {
@@ -59,7 +59,7 @@ export default function CreateBlog() {
             </div>
           </div>
           <div className="modal-footer">
-            <button type="button" onClick={handleSubmit} className="btn btn-dark">Post Blog</button>
+            <button type="button" onClick={postHandleSubmit} className="btn btn-dark">Post Blog</button>
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import CreateBlog from "../createBlog";
+import AllCommentsList from "../allCommentsList";
+import AllFavoriteList from "../allFavoriteList";
 
 export default function Navbar() {
   return (
@@ -19,10 +21,16 @@ export default function Navbar() {
 
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto fw-light">
-              <li className="nav-item p-1 ms-2 me-2">
+              <li 
+                className="nav-item p-1 ms-2 me-2" 
+                data-bs-toggle="modal" 
+                data-bs-target="#allCommentsModal">
                 Comments
               </li>
-              <li className="nav-item p-1 ms-2 me-2">
+              <li 
+                className="nav-item p-1 ms-2 me-2"
+                data-bs-toggle="modal" 
+                data-bs-target="#allFavoriteModal">
                 Favorites
               </li>
               <li className="nav-item ms-2 me-2">
@@ -38,6 +46,8 @@ export default function Navbar() {
         </div>
       </nav>
       <CreateBlog />
+      <AllCommentsList />
+      <AllFavoriteList />
     </div>
   );
 };
