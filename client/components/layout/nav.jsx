@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CreateBlog from "../createBlog";
 
 export default function Navbar() {
@@ -5,9 +6,9 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container">
-          <a className="navbar-brand pt-0 pb-0 fw-bold fs-3">
+          <Link href={'/'} className="navbar-brand pt-0 pb-0 fw-bold fs-3">
             Doodle inc.
-          </a>
+          </Link>
           <button className="navbar-toggler collapsed" type="button" 
             data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" 
             aria-expanded="false" aria-label="Toggle navigation">

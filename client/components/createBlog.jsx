@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import axios from "axios";
 
 export default function CreateBlog() {
   const [blog, setBlog] = useState({
@@ -8,8 +9,13 @@ export default function CreateBlog() {
     body: ''
   });
 
-  const handleSubmit = () => {
-    console.log(blog);
+  //blog data send the server
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post('http://localhost:4000/blogs', blog)
+      .then((res) => {
+        alert(res.data.message);
+      });
     setBlog({ userId: '', title: '', body: '' });
   };
 
@@ -29,7 +35,7 @@ export default function CreateBlog() {
                   type="number" 
                   className="form-control" 
                   value={blog.userId}
-                  onChange={(e) => setBlog({...blog, userId: e.target.value})}
+                  onChange={(e) => setBlog({...blog, userId: parseInt(e.target.value)})}
                 />
               </div>
               <div className="mb-3">
