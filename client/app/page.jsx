@@ -2,13 +2,10 @@
 import axios from "axios";
 import { deleteBlog } from "@/lib/delete";
 import Link from "next/link";
-import Edit from "../components/edit";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  // const allBlogs = await getAllPosts();
   const [allBlogs, setAllBlogs] = useState(null);
-  const [editData, setEditData] = useState({});
 
   useEffect(() => {
     const getData = async () => {
@@ -46,13 +43,6 @@ export default function Home() {
                     onClick={() => deleteBlog(item.id)}>
                     Delete
                   </button>
-                  <button 
-                    type="button" 
-                    className="btn btn-outline-success btn-sm me-2"
-                    onClick={() => setEditData(item)}
-                    data-bs-toggle="modal" data-bs-target="#editModal">
-                    Edit
-                  </button>
                 </div>
               </div>
               <Link 
@@ -68,7 +58,6 @@ export default function Home() {
           )
         })
       }
-      <Edit data={editData}/>
     </main>
   );
 };

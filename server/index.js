@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-// const bodyParser = require('body-parser');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -9,7 +8,7 @@ app.use(cors());
 const port = 4000;
 
 // Store the data
-const blogs = [
+let blogs = [
   {
     userId: 1,
     id: 1,
@@ -29,7 +28,7 @@ const blogs = [
     body: "et iusto sed quo iure voluptatem occaecati omnis eligendi aut ad voluptatem doloribus vel accusantium quis pariatur molestiae porro eius odio et labore et velit aut"
   }
 ];
-const comments = [
+let comments = [
   {
     blogId: 1,
     id: 1,
@@ -52,6 +51,7 @@ const comments = [
     body: "quia molestiae reprehenderit quasi aspernatur aut expedita occaecati aliquam eveniet laudantium omnis quibusdam delectus saepe quia accusamus maiores nam est cum et ducimus et vero voluptates excepturi deleniti ratione"
   }
 ];
+let favorite = [];
 
 // Create a new blog
 app.post('/blogs', (req, res) => {
@@ -65,12 +65,10 @@ app.post('/blogs', (req, res) => {
   blogs.push(newBlog);
   res.status(201).json({ message: 'Blog successfully add.' });
 });
-
 // Get all blogs
 app.get('/blogs', (req, res) => {
   res.status(200).json(blogs);
 });
-
 // Get id blog
 app.get('/blogs/:blogId', (req, res) => {
   const blogId = parseInt(req.params.blogId);
@@ -82,6 +80,14 @@ app.get('/blogs/:blogId', (req, res) => {
   }
   res.status(200).json(page);
 });
+// Delete a blog
+app.delete('/blogs/:id', (req, res) => {
+  const blogId = parseInt(req.params.id);
+  blogs = blogs.filter(blog => blog.id !== blogId);
+  console.log("Delete id: " + blogId);
+  res.json({ message: 'Blog deleted successfully' });
+});
+
 
 // Create a new comment
 app.post('/comment', (req, res) => {
@@ -91,9 +97,46 @@ app.post('/comment', (req, res) => {
     ...comment,
     id: commentLength
   };
-  console.log(newComment)
+  console.log(newComment);
   comments.push(newComment);
   res.status(201).json({ message: 'Comment successfully add.' });
+});
+// Get all comments
+app.get('/comments', (req, res) => {
+  res.status(200).json(comments);
+});
+// Delete a comment
+app.delete('/comment/:id', (req, res) => {
+  const commentId = parseInt(req.params.id);
+  comments = comments.filter(comment => comment.id !== commentId);
+  console.log("Delete id: " + commentId);
+  res.json({ message: 'Comment deleted successfully' });
+});
+
+
+//favorite add id
+app.post('/favorite/:favoriteId', (req, res) => {
+  const favoriteId = parseInt(req.params.favoriteId);
+  const favoritedata = blogs.filter(blog => blog.id === favoriteId);
+  favorite.push(favoritedata[0]);
+  res.status(200).json({message: 'save your like post'});
+});
+// Get all favorite
+app.get('/favorite', (req, res) => {
+  res.status(200).json(favorite);
+});
+// Delete a favorite
+app.delete('/favorite/:id', (req, res) => {
+  const favoriteId = parseInt(req.params.id);
+  favorite = favorite.filter(like => like.id !== favoriteId);
+  res.json({ message: 'you are unlike post' });
+});
+//favorite post like or unlike
+app.get('/favorite/like/:favoriteId', (req, res) => {
+  const favoriteId = parseInt(req.params.favoriteId);
+  const favoritedata = favorite.filter(item => item.id === favoriteId);
+  if(favoritedata.length === 1)return res.status(200).send(true);
+  if(favoritedata.length === 0)return res.status(200).send(false);
 });
 
 

@@ -32,7 +32,6 @@ export default async function CreateBlog() {
                           onClick={() => deleteComment(comment.id)}>
                           Delete
                         </button>
-                        <button type="button" className="btn btn-outline-success btn-sm me-2">Edit</button>
                       </div>
                     </div>
                   )
