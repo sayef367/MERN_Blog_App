@@ -61,8 +61,8 @@ app.post('/blogs', (req, res) => {
     ...blog,
     id: blogLength
   };
-  console.log(newBlog)
   blogs.push(newBlog);
+  console.log(newBlog);
   res.status(201).json({ message: 'Blog successfully add.' });
 });
 // Get all blogs
@@ -77,15 +77,27 @@ app.get('/blogs/:blogId', (req, res) => {
   const page = {
     getBlog, 
     blogComments
-  }
+  };
   res.status(200).json(page);
 });
 // Delete a blog
 app.delete('/blogs/:id', (req, res) => {
   const blogId = parseInt(req.params.id);
   blogs = blogs.filter(blog => blog.id !== blogId);
-  console.log("Delete id: " + blogId);
+  console.log("Delete blog id:", blogId);
   res.json({ message: 'Blog deleted successfully' });
+});
+// Update a new blog
+app.put('/blogs', (req, res) => {
+  const updatedBlog = req.body;
+  const index = blogs.findIndex(blog => blog.id === updatedBlog.id);
+  if (index !== -1) {
+    blogs[index] = { ...blogs[index], ...updatedBlog };
+    console.log("Update blog Id:", index);
+    res.status(200).json({ message: 'Blog successfully update.' });
+  } else {
+    res.status(404).json({ error: 'Blog not found' });
+  };
 });
 
 
@@ -109,7 +121,7 @@ app.get('/comments', (req, res) => {
 app.delete('/comment/:id', (req, res) => {
   const commentId = parseInt(req.params.id);
   comments = comments.filter(comment => comment.id !== commentId);
-  console.log("Delete id: " + commentId);
+  console.log("Delete comment id:", commentId);
   res.json({ message: 'Comment deleted successfully' });
 });
 
