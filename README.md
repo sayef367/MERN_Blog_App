@@ -40,15 +40,36 @@ node index.js
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## MERN Blog App view
+Add new Blog
 ![](client/public/createBlog.png)
+
+Blog Home page
 ![](client/public/blogHome.png)
+
+Blog page
 ![](client/public/blogPage.png)
+
+Delete Blog page
 ![](client/public/deleteBlog.png)
+
+Update Blog page
 ![](client/public/editBlog.png)
+
+Like page
 ![](client/public/likePage.png)
+
+All Favorite List
 ![](client/public/favoriteList.png)
+
+Add new Comment
 ![](client/public/addComment.png)
+
+All Comment List
 ![](client/public/allComment.png)
+
+Update Comment
 ![](client/public/updateComment.png)
+
+Delete Comment
 ![](client/public/deleteComment.png)
 
