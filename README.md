@@ -10,8 +10,9 @@ This web app using dependencies are:
 
 Application functionality are:
 - Create, Update, Delete, View Blog
+- Create, Update, Delete, View Comment
 - Frontend using NextJs app Router
-- Backend server using NodeJS
+- Backend server using NodeJS(Express)
 - Blog page like/unlike
 - Blog post comment
 - Loading indicator
@@ -38,4 +39,16 @@ node index.js
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## MERN Blog App view
+![](client/public/createBlog.png)
+![](client/public/blogHome.png)
+![](client/public/blogPage.png)
+![](client/public/deleteBlog.png)
+![](client/public/editBlog.png)
+![](client/public/likePage.png)
+![](client/public/favoriteList.png)
+![](client/public/addComment.png)
+![](client/public/allComment.png)
+![](client/public/updateComment.png)
+![](client/public/deleteComment.png)
 

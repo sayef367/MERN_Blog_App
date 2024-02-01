@@ -10,7 +10,7 @@ export default async function Page({ params }) {
   if(!data) return <h2>Loading...</h2>
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 mb-5">
       <div className="input-group">
         <div className="me-5">
           <h5>User Id:- {post.userId}</h5>
