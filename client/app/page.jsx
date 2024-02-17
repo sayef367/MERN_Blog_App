@@ -26,7 +26,7 @@ export default function Home() {
     getData();
   },[]);
 
-  if(allBlogs === null) return <h1 className="text-center">Loading...</h1>
+  if(allBlogs === null) return <h1 className="text-center mt-4 mb-3">Loading...</h1>
 
   return (
     <main className="container mb-5">

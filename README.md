@@ -22,12 +22,14 @@ Application functionality are:
 Highly recommended use chrome browser.
 
 1. First download the code and run:
+
 Client side and Server side folder
 ```bash
 npm install
 ```
 
 2. Run the development server:
+
 Client side
 ```bash
 npm run dev

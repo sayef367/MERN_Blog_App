@@ -6,7 +6,6 @@ const favoriteRouter = require('./router/favoriteRouter');
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
 const port = 4000;
